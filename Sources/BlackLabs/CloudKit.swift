@@ -1,9 +1,9 @@
 import UIKit
 import CloudKit
 
-extension CKRecord {
+public extension CKRecord {
 
-    public static func fetchRecordAsset(recordName: String, assetName: String, completion: @escaping (String?)->Swift.Void) {
+    static func fetchRecordAsset(recordName: String, assetName: String, completion: @escaping (String?)->Swift.Void) {
         let publicDatabase = CKContainer.default().publicCloudDatabase
         let recordId = CKRecord.ID(recordName: recordName)
         publicDatabase.fetch(withRecordID: recordId) { (record, error) in
@@ -30,7 +30,6 @@ extension CKRecord {
      if error == nil { print("success") }
      }
 */
-    /*
     static func subscribeToRecordUpdate(recordType: String, completion: @escaping (Error?)->Swift.Void) {
         let subscription = CKSubscription(
             recordType: recordType,
@@ -46,10 +45,9 @@ extension CKRecord {
             completion(error)
         }
     }
-*/
 }
 
-extension CKNotification {
+public extension CKNotification {
     
     static func recordId(fromUserInfo userInfo: [AnyHashable : Any]) ->CKRecord.ID? {
         let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])!
