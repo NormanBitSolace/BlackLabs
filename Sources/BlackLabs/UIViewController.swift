@@ -40,14 +40,12 @@ public extension UIViewController {
 }
 
 public extension UIViewController {
-    func email(address: String, subject: String) {
+    func email() {
         if MFMailComposeViewController.canSendMail() {
-            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
-            let appName = Bundle.main.infoDictionary?["CFBundleName"]
-            let subject = "\(subject) - \(appName ?? "unknown") \(version ?? "unknown") iOS: \(UIDevice.current.systemVersion)"
+            let subject = "\(Bundle.main.appName) \(Bundle.main.version) \(UIDevice.modelName) iOS: \(UIDevice.current.systemVersion)"
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
-            mail.setToRecipients([address])
+            mail.setToRecipients(["puzzlepleasure@gmail.com"])
             mail.setSubject(subject)
             self.present(mail, animated: true)
         } else {
@@ -102,5 +100,19 @@ public extension UIViewController {
         print("isBeingDismissed=\(isBeingDismissed)")
         print("isMovingToParentViewController=\(isMovingToParent)")
         print("isMovingFromParentViewController=\(isMovingFromParent)")
+    }
+}
+
+public extension UIViewController {
+
+    func isTopViewController() -> Bool {
+        return self.navigationController?.visibleViewController == self
+    }
+
+    func viewFromClassName(_ name: String) -> UIView? {
+        if let viewClass = name.toClass() as? UIView.Type {
+            return viewClass.init(frame: .zero)
+        }
+        return nil
     }
 }

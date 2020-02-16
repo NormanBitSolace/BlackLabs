@@ -38,13 +38,13 @@ open class Grid<Element>: NSObject, NSCoding {
         a = aDecoder.decodeObject(forKey: "a") as! [Element]
     }
     
-    public func encode(with aCoder: NSCoder) {
+    open func encode(with aCoder: NSCoder) {
         aCoder.encode(numRows, forKey:"numRows")
         aCoder.encode(numCols, forKey:"numCols")
         aCoder.encode(a, forKey:"a")
     }
     
-    public override var description: String {
+    open override var description: String {
         var s = "\(className)\n"
         
         //        for i in 0..<count {

@@ -26,7 +26,7 @@ public extension String {
 //let a = [1,2,3,4]
 //let sa = CsvString.fromIntArray(a)
 //CsvString(sa).toIntArray()
-public class CsvString {
+open class CsvString {
     let s: String?
     
     init(_ s: String?) {
