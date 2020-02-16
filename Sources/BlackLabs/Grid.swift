@@ -3,11 +3,11 @@ import UIKit
 //  When Generics can be extended conform to Sequence, etc.
 open class Grid<Element>: NSObject, NSCoding {
     var a: [Element]
-    let numRows: Int
-    let numCols: Int
-    var count : Int { return numCols * numRows }
+    public let numRows: Int
+    public let numCols: Int
+    public var count : Int { return numCols * numRows }
     
-    subscript(index: Int) -> Element {
+    public subscript(index: Int) -> Element {
         return value(index)
     }
 
