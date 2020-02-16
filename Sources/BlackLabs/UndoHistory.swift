@@ -14,7 +14,7 @@ public struct UndoHistory<A> {
         }
     }
     
-    init(initialValue: A) {
+    public init(initialValue: A) {
         self.initialValue = initialValue
     }
     
