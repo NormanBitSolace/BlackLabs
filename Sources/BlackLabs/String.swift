@@ -29,16 +29,16 @@ public extension String {
 open class CsvString {
     let s: String?
     
-    init(_ s: String?) {
+    public init(_ s: String?) {
         self.s = s
     }
-    func toIntArray()->[Int] {
+    public func toIntArray()->[Int] {
         guard let s = s else {
             return [Int]()
         }
         return s.components(separatedBy: ",").compactMap { Int($0)! }
     }
-    static func fromIntArray(_ a: [Int]?) -> String? {
+    public static func fromIntArray(_ a: [Int]?) -> String? {
         return a?.map(String.init).joined(separator: ",")
     }
 }
