@@ -1,7 +1,7 @@
 import UIKit
 
 //  When Generics can be extended conform to Sequence, etc.
-public class Grid<Element>: NSObject, NSCoding {
+open class Grid<Element>: NSObject, NSCoding {
     var a: [Element]
     let numRows: Int
     let numCols: Int
@@ -76,7 +76,7 @@ public class Grid<Element>: NSObject, NSCoding {
 
 
 //  PUBLIC MUTATOR
-extension Grid {
+public extension Grid {
     
     func setValue(newElement: Element, at index: Int) {
         valid(index)
@@ -85,7 +85,7 @@ extension Grid {
 }
 
 //  PUBLIC ACCESSORS
-extension Grid {
+public extension Grid {
     
     func value(_ index: Int) -> Element {
         valid(index)
