@@ -106,6 +106,38 @@ final class BlackLabsTests: XCTestCase {
         XCTAssertEqual(obj.a, read?.a)
     }
 
+    func testStrings() {
+        let s = """
+            a
+
+            b
+            c
+
+        """
+        let a = s.toLines
+        XCTAssertEqual(a.count, 5)
+        let fa = a.removeEmptyLines
+        XCTAssertEqual(fa[0], "a")
+        XCTAssertEqual(fa[1], "b")
+        XCTAssertEqual(fa[2], "c")
+        XCTAssertEqual(fa.count, 3)
+    }
+
+    func testStringToDictionary() {
+        let s = """
+            key1\tvalue1
+
+            key2\tvalue2
+            key3\tvalue3
+
+        """
+        let d = s.toDictionary
+        XCTAssertEqual(d.count, 3)
+        XCTAssertEqual(d["key1"], "value1")
+        XCTAssertEqual(d["key2"], "value2")
+        XCTAssertEqual(d["key3"], "value3")
+    }
+
     static var allTests = [
         ("testBundle", testBundle),
         ("testArray2D", testArray2D),
@@ -117,5 +149,7 @@ final class BlackLabsTests: XCTestCase {
         ("testDevice", testDevice),
         ("testNumberFormatting", testNumberFormatting),
         ("testUserDefaults", testUserDefaults),
+        ("testStrings", testStrings),
+        ("testStringToDictionary", testStringToDictionary),
         ] + BlackLabsDataTests.allTests
 }

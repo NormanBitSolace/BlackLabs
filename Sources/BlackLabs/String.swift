@@ -21,6 +21,27 @@ public extension String {
     func toArray() -> [String] {
         return self.compactMap { String($0) }
     }
+
+    var toLines: [String] {
+        let lines = self.components(separatedBy: CharacterSet.newlines).map { $0.trimmingCharacters(in: .whitespaces) }
+        return lines
+    }
+    /// Converts a string to a `Dictionary` assuming key and value are separated by commas.
+    var toDictionary: [String: String]  {
+        return self.toDictionary()
+    }
+    func toDictionary(delimiter: String = "\t") -> [String: String]  {
+        let lines = self.toLines.removeEmptyLines
+        let d = lines.reduce(into: [String: String]()) { result, line in
+            let parts = line.components(separatedBy: delimiter)
+            if parts.count == 2 {
+                let key = parts[0].trimmingCharacters(in: .whitespaces)
+                let value = parts[1].trimmingCharacters(in: .whitespaces)
+                result[key] = value
+            }
+        }
+        return d
+    }
 }
 
 //let a = [1,2,3,4]

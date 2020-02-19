@@ -12,6 +12,7 @@ public extension URL {
 
 public extension Data {
 
+    /// Assumes that local files are project based and thus expected and fails if not.
     init(localFile name: String) {
         let url = URL(localFile: name)
         do {
@@ -21,25 +22,25 @@ public extension Data {
         }
     }
 
-    static func parse<T>(localFile name: String, _ callback: (String)->T) -> T {
-        let data = Data(localFile: name)
-        let fileContents = String(decoding: data, as: UTF8.self)
-        let result = callback(fileContents)
-        return result
-    }
-
-    static func fromLocalFile(_ localFile: String) -> String? {
+    static func toString(_ localFile: String) -> String? {
         let data = Data(localFile: localFile)
         let fileContents = String(decoding: data, as: UTF8.self)
         return fileContents
     }
 
-    static func lines(localFile name: String) -> [String]? {
-        let lines: [String]? = Data.parse(localFile: name) { str in
-            let lines = str.components(separatedBy: CharacterSet.newlines).filter { $0.count > 0 }
-            return lines.compactMap { $0.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) }
+    static func parse<T>(localFile name: String, _ callback: (String)->T) -> T? {
+        if let str = Data.toString(name) {
+            let result = callback(str)
+            return result
         }
-        return lines
+        return nil
+    }
+
+    static func lines(localFile name: String) -> [String]? {
+        let result = Data.parse(localFile: name) { str in
+            return str.toLines.removeEmptyLines
+        }
+        return result
     }
 }
 
