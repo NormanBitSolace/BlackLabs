@@ -22,9 +22,14 @@ public extension Optional where Wrapped: Collection {
 
 public extension Sequence where Element == String {
 
+    /// Remove empty lines and lines containing empty quotes.
+    func removeEmptyLines() -> [String]  {
+        return self.filter { $0.count > 0 }.filter { !$0.isEmpty } // remove lines with empty quotes
+    }
+
     /// Converts `[String]` that is formated `String\tString\n` (`key value`) into a `Dictionary<String,String>`.
     func convertToDictionary() -> [String: String]  {
-        let lines = self.filter { $0.count > 0 }.filter { !$0.isEmpty } // remove lines with empty quotes
+        let lines = removeEmptyLines()
         let d = lines.reduce(into: [String: String]()) { result, line in
             let parts = line.components(separatedBy: "\t")
             if parts.count == 2 {
