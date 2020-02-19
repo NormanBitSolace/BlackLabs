@@ -20,6 +20,22 @@ public extension Optional where Wrapped: Collection {
     }
 }
 
+extension Sequence where Element == String {
+    /// Converts `[String]` that is formated `String\tString\n` (`key value`) into a `Dictionary<String,String>`.
+    func convertToDictionary() -> [String: String]  {
+        let lines = self.filter { $0.count > 0 }.filter { !$0.isEmpty } // remove lines with empty quotes
+        let d = lines.reduce(into: [String: String]()) { result, line in
+            let parts = line.components(separatedBy: "\t")
+            if parts.count == 2 {
+                let key = parts[0].trimmingCharacters(in: .whitespaces)
+                let value = parts[1].trimmingCharacters(in: .whitespaces)
+                result[key] = value
+            }
+        }
+        return d
+    }
+}
+
 public extension Collection {
 
     /// Returns the element at the specified index iff it is within bounds, otherwise nil.
