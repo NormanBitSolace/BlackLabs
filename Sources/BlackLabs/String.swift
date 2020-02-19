@@ -23,7 +23,7 @@ public extension String {
     }
 
     var toLines: [String] {
-        let lines = self.components(separatedBy: CharacterSet.newlines).map { $0.trimmingCharacters(in: .whitespaces) }
+        let lines = self.components(separatedBy: CharacterSet.newlines).map { $0.trim }
         return lines
     }
     /// Converts a string to a `Dictionary` assuming key and value are separated by commas.
@@ -31,16 +31,10 @@ public extension String {
         return self.toDictionary()
     }
     func toDictionary(delimiter: String = "\t") -> [String: String]  {
-        let lines = self.toLines.removeEmptyLines
-        let d = lines.reduce(into: [String: String]()) { result, line in
-            let parts = line.components(separatedBy: delimiter)
-            if parts.count == 2 {
-                let key = parts[0].trimmingCharacters(in: .whitespaces)
-                let value = parts[1].trimmingCharacters(in: .whitespaces)
-                result[key] = value
-            }
-        }
-        return d
+        return self.toLines.toDictionary(delimiter: delimiter)
+    }
+    var trim: String {
+        return self.trimmingCharacters(in: .whitespaces)
     }
 }
 

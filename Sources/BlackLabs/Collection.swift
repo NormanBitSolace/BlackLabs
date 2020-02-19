@@ -26,6 +26,22 @@ public extension Sequence where Element == String {
     var removeEmptyLines: [String]  {
         return self.filter { $0.count > 0 }.filter { !$0.isEmpty } // remove lines with empty quotes
     }
+
+    var trimLines: [String]  {
+        return self.map { $0.trim }
+    }
+
+    func toDictionary(delimiter: String = "\t") -> [String: String]  {
+        let d = self.removeEmptyLines.reduce(into: [String: String]()) { result, line in
+            let parts = line.components(separatedBy: delimiter)
+            if parts.count == 2 {
+                let key = parts[0].trim
+                let value = parts[1].trim
+                result[key] = value
+            }
+        }
+        return d
+    }
 }
 
 public extension Collection {
