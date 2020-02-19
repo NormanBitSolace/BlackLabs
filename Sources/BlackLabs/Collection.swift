@@ -20,7 +20,8 @@ public extension Optional where Wrapped: Collection {
     }
 }
 
-extension Sequence where Element == String {
+public extension Sequence where Element == String {
+
     /// Converts `[String]` that is formated `String\tString\n` (`key value`) into a `Dictionary<String,String>`.
     func convertToDictionary() -> [String: String]  {
         let lines = self.filter { $0.count > 0 }.filter { !$0.isEmpty } // remove lines with empty quotes
