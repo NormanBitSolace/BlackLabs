@@ -4,18 +4,18 @@ import Foundation
     let timer = CodeTimer()
     timer.log("Time elapsed:") // Time elapsed: 0.380 second(s).
  */
-public struct CodeTimer {
+open class CodeTimer {
     var startTime: CFAbsoluteTime = 0
 
-    init() {
+    public init() {
         start()
     }
 
-    mutating func start() {
+    public func start() {
         startTime = CFAbsoluteTimeGetCurrent()
     }
 
-    func log(_ message: String) {
+    public func log(_ message: String) {
         let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
         let s = String(format: "%.3f", timeElapsed)
         print("\(message) \(s) second(s).")
