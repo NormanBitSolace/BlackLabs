@@ -32,11 +32,8 @@ public extension Sequence where Element == String {
     }
 
     func toDictionary(delimiter: String = "\t") -> [String: String]  {
-        let d = self.removeEmptyLines.reduce(into: [String: String]()) { result, line in
-            let parts = line.components(separatedBy: delimiter)
-            if parts.count == 2 {
-                let key = parts[0].trim
-                let value = parts[1].trim
+        let d = removeEmptyLines.reduce(into: [String: String]()) { result, line in
+            if let (key, value) = line.keyValue {
                 result[key] = value
             }
         }
@@ -115,6 +112,7 @@ public extension Array {
 
 }
 
+/// Going forward use `Grid<T>.`
 public struct Array2D<T> {
     public let rows: Int
     public let cols: Int

@@ -36,6 +36,16 @@ public extension String {
     var trim: String {
         return self.trimmingCharacters(in: .whitespaces)
     }
+    /// If a string begins with a key  and a value separated by a tab, this will return a key value pair.
+    var keyValue: (String, String)? {
+        let parts = self.components(separatedBy: "\t")
+        if parts.count >= 2 {
+            let key = parts[0].trim
+            let value = parts[1].trim
+            return (key, value)
+        }
+        return nil
+    }
 }
 
 //let a = [1,2,3,4]
