@@ -57,6 +57,16 @@ public extension URL {
         }
     }
 
+    static func open(_ urlStr: String) {
+        if let url = URL(string: urlStr) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+
     func putData(data: Data, completion: @escaping (Result<Data, NetworkError>) -> Void) {
         let req = URLRequest.createPut(url: self, data: data)
         URLSession.shared.runTask(with: req) { result in completion(result) }
