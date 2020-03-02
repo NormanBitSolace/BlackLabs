@@ -32,6 +32,18 @@ public extension UIView {
     func constrainToParentBounds(_ child: UIView) {
         child.constrain(to: self)
     }
+
+    @available(iOS 9.0, *)
+    func constrainToSquareAspect() {
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalTo: heightAnchor, multiplier: 1).isActive = true
+    }
+
+    @available(iOS 9.0, *)
+    func constrainHeightPercentage(to view: UIView, multiplier: CGFloat = 1) {
+        translatesAutoresizingMaskIntoConstraints = false
+        heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: multiplier).isActive = true
+    }
 }
 
 public extension UIView {
@@ -245,7 +257,7 @@ public extension Data {
     }
 }
 
-extension UIImage {
+public extension UIImage {
     /// Creates an UIImage from a UIView.
     convenience init(view: UIView) {
         UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1.0)
