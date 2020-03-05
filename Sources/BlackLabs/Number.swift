@@ -4,6 +4,7 @@ public extension Int {
     var f: CGFloat { return CGFloat(self) }
     var d: Double { return Double(self) }
     var s: String { return "\(self)" }
+    var size: CGSize { return CGSize(width: self, height: self) }
 
     /// 2.format("03") yeilds 002
     func format(_ f: String) -> String {
@@ -15,6 +16,7 @@ public extension CGFloat {
     var i: Int { return Int(self) }
     var d: Double { return Double(self) }
     var s: String { return "\(self)" }
+    var size: CGSize { return CGSize(width: self, height: self) }
 
     /// let cgf: CGFloat = 8; cgf.format("3") yeilds "8.000"
     func format(_ f: String) -> String {
@@ -26,6 +28,7 @@ public extension Double {
     var i: Int { return Int(self) }
     var f: CGFloat { return CGFloat(self) }
     var s: String { return "\(self)" }
+    var size: CGSize { return CGSize(width: self, height: self) }
 
     /// Double.pi.format("3") yeilds "3.142"
     func format(_ f: String) -> String {
