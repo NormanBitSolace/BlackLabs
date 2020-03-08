@@ -46,6 +46,43 @@ public extension String {
         }
         return nil
     }
+
+    static let alphabet: [String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+
+    func substring(start: Int, length: Int) -> String {
+        let startIndex = self.index(self.startIndex, offsetBy: start)
+//        guard self.startIndex > startIndex else { return nil }
+        let endIndex = self.index(startIndex, offsetBy: length)
+//        guard self.endIndex <= endIndex else { return nil }
+        let range = startIndex..<endIndex
+        return String(self[range])
+    }
+
+    var isLetter: Bool { return self[self.startIndex].isLetter }
+    var isNumber: Bool { return self[self.startIndex].isNumber }
+    var isWhitespace: Bool { return self[self.startIndex].isWhitespace }
+
+    var longestWord: String? {
+        if let longest = self.components(separatedBy: [" ", "-"]).max(by: { $1.count > $0.count }) {
+            return longest
+        }
+        return nil
+    }
+
+    /// Removes accents above and below letters e.g. é.
+    var withoutDiacritics: String { return self.folding(options: .diacriticInsensitive, locale: NSLocale.current) }
+
+    func size(forFont font: UIFont) -> CGSize {
+        let size: CGSize = self.size(withAttributes: [NSAttributedString.Key.font: font as Any])
+        return CGSize(width: ceil(size.width), height: ceil(size.height))
+    }
+
+    func lastPosition(of c: Character) -> Int? {
+        if let index = lastIndex(of: c) {
+            return index.utf16Offset(in: self)
+        }
+        return nil
+    }
 }
 
 //let a = [1,2,3,4]

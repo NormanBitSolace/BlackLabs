@@ -266,4 +266,12 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         self.init(cgImage: (image?.cgImage!)!)
     }
+
+    static func offscreenRender(offscreenParentView: UIView, view: UIView) -> UIImage {
+        offscreenParentView.addSubview(view)
+        view.frame.origin.x = -view.frame.size.width - 1.0
+        let image = UIImage(view: view)
+        view.removeFromSuperview()
+        return image
+    }
 }
