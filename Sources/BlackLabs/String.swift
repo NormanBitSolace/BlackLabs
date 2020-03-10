@@ -41,7 +41,8 @@ public extension String {
         let parts = self.components(separatedBy: "\t")
         if parts.count >= 2 {
             let key = parts[0].trim
-            let value = parts[1].trim
+            /// It is possible that the value contents include a tab so they are rejoined vs. using parts[1].trim
+            let value = (parts[1..<parts.count]).joined(separator: "\t").trim
             return (key, value)
         }
         return nil
