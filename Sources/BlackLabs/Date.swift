@@ -1,5 +1,7 @@
 import Foundation
 
+public let SECONDS_PER_DAY: TimeInterval = 60*60*24
+
 public extension Date {
 
     static func parse(_ string: String, format: String = "yyyy-MM-dd") -> Date {
