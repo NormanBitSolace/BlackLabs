@@ -32,7 +32,7 @@ open class Grid<Element: Codable>: Codable {
 //        self.init(numRows: numRows, numCols: numCols, array: Array.init(repeating: initalValue, count: numCols * numRows))
 //    }
     
-    public var description: String {
+    open var description: String {
         var s = "\("Grid")\n"
         
         //        for i in 0..<count {
