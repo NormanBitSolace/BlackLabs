@@ -59,8 +59,11 @@ public extension IOSDirectoryFile {
     }
 
     static func load(_ fileName: String) -> Any? {
-        let fullPath = path(fileName)
-        return NSKeyedUnarchiver.unarchiveObject(withFile: fullPath)
+        let fullPath = url.appendingPathComponent(fileName)
+        if let data = try? Data(contentsOf: fullPath) {
+            return try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data)
+        }
+        return nil
     }
 
     static func exists(_ fileName: String) -> Bool {
