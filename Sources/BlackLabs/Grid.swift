@@ -1,7 +1,7 @@
 import UIKit
 
 //  When Generics can be extended conform to Sequence, etc.
-open class Grid<Element>: NSObject, NSCoding {
+open class Grid<Element: Codable>: Codable {
     var a: [Element]
     public let numRows: Int
     public let numCols: Int
@@ -32,20 +32,8 @@ open class Grid<Element>: NSObject, NSCoding {
 //        self.init(numRows: numRows, numCols: numCols, array: Array.init(repeating: initalValue, count: numCols * numRows))
 //    }
     
-    public required init?(coder aDecoder: NSCoder) {
-        numRows = aDecoder.decodeInteger(forKey: "numRows")
-        numCols = aDecoder.decodeInteger(forKey: "numCols")
-        a = aDecoder.decodeObject(forKey: "a") as! [Element]
-    }
-    
-    open func encode(with aCoder: NSCoder) {
-        aCoder.encode(numRows, forKey:"numRows")
-        aCoder.encode(numCols, forKey:"numCols")
-        aCoder.encode(a, forKey:"a")
-    }
-    
-    open override var description: String {
-        var s = "\(className)\n"
+    var description: String {
+        var s = "\("Grid")\n"
         
         //        for i in 0..<count {
         //            s += "\(i.format("2")) "
