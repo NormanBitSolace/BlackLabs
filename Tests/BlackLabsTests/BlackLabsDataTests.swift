@@ -89,6 +89,7 @@ final class BlackLabsDataTests: XCTestCase {
                 service.update(id: id, model: updatedPet) { _ in
                     // REST convention doesn't specify that PUT should return updated object,
                     // though it is common practice. So do a GET here just in case it doesn't.
+                    print(updatedPet)
                     service.get(id: id) { pet in
                         XCTAssertEqual(pet?.name, "Musky")
                         expectation.fulfill()

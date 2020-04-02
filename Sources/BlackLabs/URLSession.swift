@@ -9,29 +9,24 @@ public extension URLSession {
     }
 
     /// Prints `URLSessionDataTask` request info
-    func runTask(with request: URLRequest, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+    func runTask(with request: URLRequest, completion: @escaping (Result<Data?, NetworkError>) -> Void) {
         let logging = UserDefaults.standard.bool(forKey: URLSession.loggingKey)
         if logging { print(request.info) }
         let task = URLSession.shared.dataTask(with: request) { data, resp, err in
             guard err == nil else {
-                let message = err!.localizedDescription
-                if logging { print(message) }
-                return completion(.failure(.messageError(message)))
+                let error: NetworkError = .dataTask(err!)
+                if logging { print(error) }
+                return completion(.failure(error))
             }
             if let statusCode = resp?.statusCode {
                 guard statusCode < 400  else {
-                    let message = HTTPURLResponse.localizedString(forStatusCode: statusCode)
-                    if logging { print(message) }
-                    return completion(.failure(.messageError(message)))
+                    let error: NetworkError = .httpStatus(statusCode)
+                    if logging { print(error) }
+                    return completion(.failure(error))
                 }
             }
-            if let data = data {
-                if logging { print("Success \(data.asString.prefix(100))") }
-                completion(.success(data))
-            } else {
-                if logging { print("Unknown error.") }
-                completion(.failure(.unknownError))
-            }
+            if logging { print("Success \(data?.asString.prefix(100) ?? "nil"))") }
+            completion(.success(data))
         }
         task.resume()
     }

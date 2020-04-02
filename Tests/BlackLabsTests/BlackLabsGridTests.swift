@@ -7,6 +7,10 @@ class SubGrid: Grid<Int> {
 
 final class BlackLabsGridTests: XCTestCase {
 
+    /*
+
+     Use if when `Grid` conforms to `Codable`.
+     
     func testCodable() {
         let grid = Grid.init(numRows: 2, numCols: 3, initalValue: 7)
         let encoder = JSONEncoder()
@@ -29,4 +33,6 @@ final class BlackLabsGridTests: XCTestCase {
         XCTAssertEqual(grid2.count, 6)
         XCTAssertEqual(grid2.name, "bob")
     }
+*/
+
 }
