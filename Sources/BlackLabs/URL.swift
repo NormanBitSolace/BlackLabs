@@ -67,12 +67,12 @@ public extension URL {
         }
     }
 
-    func putData(data: Data, completion: @escaping (Result<Data?, NetworkError>) -> Void) {
+    func putData(data: Data, completion: @escaping (Result<Data?, URLSessionError>) -> Void) {
         let req = URLRequest.createPut(url: self, data: data)
         URLSession.shared.runTask(with: req) { result in completion(result) }
     }
 
-    func postData(data: Data, completion: @escaping (Result<Data?, NetworkError>) -> Void) {
+    func postData(data: Data, completion: @escaping (Result<Data?, URLSessionError>) -> Void) {
         let req = URLRequest.createPost(url: self, data: data)
         URLSession.shared.runTask(with: req) { result in completion(result) }
     }
