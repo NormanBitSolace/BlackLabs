@@ -259,8 +259,8 @@ public extension Data {
 
 public extension UIImage {
     /// Creates an UIImage from a UIView.
-    convenience init(view: UIView) {
-        UIGraphicsBeginImageContextWithOptions(view.frame.size, false, 1.0)
+    convenience init(view: UIView, scale: CGFloat = 1) {
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, false, scale)
         view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
