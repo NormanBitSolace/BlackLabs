@@ -105,3 +105,26 @@ public class AppSupportFile: IOSDirectoryFile {
 public class DocumentsFile: IOSDirectoryFile {
     public static var dirSelector: FileManager.SearchPathDirectory { return .documentDirectory }
 }
+
+/// e.g. `fileNamesFromDir("/Users/Norman/Desktop/")` would return all of the file names on desktop
+public func _fileNamesFromDir(_ path: String) -> [String] {
+    let fm = FileManager.default
+    let fileExists = fm.fileExists(atPath: path)
+    guard fileExists else { return [] }
+    guard let names = try? fm.contentsOfDirectory(atPath: path) else { return [] }
+    return names
+}
+
+import UIKit
+/// e.g. `_pngFromDir("/Users/Norman/Desktop/")` would return all of the .png's on desktop
+public func _pngFromDir(_ path: String) -> [UIImage] {
+    let names = _fileNamesFromDir(path)
+    let images = names.filter { $0.hasSuffix(".png") }.compactMap { UIImage(contentsOfFile: "\(path)\($0)") }
+    return images
+}
+/// e.g. `_jpgFromDir("/Users/Norman/Desktop/")` would return all of the .jpg's on desktop
+public func _jpgFromDir(_ path: String) -> [UIImage] {
+    let names = _fileNamesFromDir(path)
+    let images = names.filter { $0.hasSuffix(".jpg") }.compactMap { UIImage(contentsOfFile: "\(path)\($0)") }
+    return images
+}
