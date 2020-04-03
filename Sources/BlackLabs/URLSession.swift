@@ -9,18 +9,18 @@ public extension URLSession {
     }
 
     /// Prints `URLSessionDataTask` request info
-    func runTask(with request: URLRequest, completion: @escaping (Result<Data?, URLSessionError>) -> Void) {
+    func runTask(with request: URLRequest, completion: @escaping (Result<Data?, DataTaskError>) -> Void) {
         let logging = UserDefaults.standard.bool(forKey: URLSession.loggingKey)
         if logging { print(request.info) }
         let task = URLSession.shared.dataTask(with: request) { data, resp, err in
             guard err == nil else {
-                let error: URLSessionError = .dataTask(err!)
+                let error: DataTaskError = .response(err!)
                 if logging { print(error) }
                 return completion(.failure(error))
             }
             if let statusCode = resp?.statusCode {
                 guard statusCode < 400  else {
-                    let error: URLSessionError = .httpStatus(statusCode)
+                    let error: DataTaskError = .httpStatusResponse(statusCode)
                     if logging { print(error) }
                     return completion(.failure(error))
                 }
