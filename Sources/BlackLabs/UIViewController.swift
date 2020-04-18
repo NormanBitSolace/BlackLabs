@@ -40,9 +40,9 @@ public extension UIViewController {
 }
 
 public extension UIViewController {
-    func email() {
+    func email(includeBuildNumber: Bool = false) {
         if MFMailComposeViewController.canSendMail() {
-            let subject = "\(Bundle.main.appName) \(Bundle.main.version) \(UIDevice.modelName) iOS: \(UIDevice.current.systemVersion)"
+            let subject = "\(Bundle.main.appName) \(includeBuildNumber ? Bundle.main.appNameAndVersion : Bundle.main.version) \(UIDevice.modelName) iOS: \(UIDevice.current.systemVersion)"
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients(["puzzlepleasure@gmail.com"])

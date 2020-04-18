@@ -266,12 +266,36 @@ public extension UIImage {
         UIGraphicsEndImageContext()
         self.init(cgImage: (image?.cgImage!)!)
     }
-
     static func offscreenRender(offscreenParentView: UIView, view: UIView) -> UIImage {
         offscreenParentView.addSubview(view)
         view.frame.origin.x = -view.frame.size.width - 1.0
         let image = UIImage(view: view)
         view.removeFromSuperview()
         return image
+    }
+    @available(iOS 10.0, *)
+    func resized(withPercentage percentage: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
+    @available(iOS 10.0, *)
+    func resized(toWidth width: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        let canvas = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
+        let format = imageRendererFormat
+        format.opaque = isOpaque
+        return UIGraphicsImageRenderer(size: canvas, format: format).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
+    @available(iOS 10.0, *)
+    func resized(withMaxLen maxLen: CGFloat, isOpaque: Bool = true) -> UIImage? {
+        guard size.width > maxLen || size.height > maxLen else { return self }
+        let currMaxLen = max(size.width, size.height)
+        let p = maxLen / currMaxLen
+        return resized(withPercentage: p)
     }
 }
