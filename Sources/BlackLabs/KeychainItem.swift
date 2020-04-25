@@ -9,6 +9,11 @@ import Foundation
 
 public struct KeychainItem {
 
+    public static var serviceKey: String {
+        guard let bundleId = Bundle.main.bundleIdentifier else { return "xZTheKeyIs42" }
+        return "\(bundleId)_detail"
+    }
+
     enum KeychainError: Error {
         case noPassword
         case unexpectedPasswordData
@@ -26,8 +31,8 @@ public struct KeychainItem {
 
     // MARK: Intialization
 
-    public init(service: String, account: String, accessGroup: String? = nil) {
-        self.service = service
+    public init(account: String, accessGroup: String? = nil) {
+        self.service = KeychainItem.serviceKey
         self.account = account
         self.accessGroup = accessGroup
     }
@@ -130,19 +135,17 @@ public struct KeychainItem {
      You should store the user identifier in your account management system.
      */
     public static var currentUserIdentifier: String {
-        guard let bundleId = Bundle.main.bundleIdentifier else { fatalError("No bundle id set.")}
         do {
-            let storedIdentifier = try KeychainItem(service: "\(bundleId)_detail", account: "userIdentifier").readItem()
+            let storedIdentifier = try KeychainItem(account: "userIdentifier").readItem()
             return storedIdentifier
         } catch {
             return ""
         }
     }
 
-    public static func deleteUserIdentifierFromKeychain() {
-        guard let bundleId = Bundle.main.bundleIdentifier else { fatalError("No bundle id set.")}
+    public static func deleteUserIdentifierFromKeychain(serviceKey: String) {
         do {
-            try KeychainItem(service: "\(bundleId)_detail", account: "userIdentifier").deleteItem()
+            try KeychainItem(account: "userIdentifier").deleteItem()
         } catch {
             print("Unable to delete userIdentifier from keychain")
         }
