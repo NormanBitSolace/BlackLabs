@@ -121,7 +121,7 @@ public extension UIDevice {
     static let modelName: String = UIDevice.current.modelName
     static let isPad = UIDevice.current.userInterfaceIdiom == .pad
     static let isPhone = UIDevice.current.userInterfaceIdiom == .phone
-    static let isSimulator = "Simulator" == UIDevice.modelName
+    static let isSimulator = UIDevice.modelName.contains("Simulator")
     static var screenType = ScreenType.current
     static let size = ScreenType.size(forScreenType: screenType)
     static let landscapeSize = ScreenType.landscapeSize(forScreenType: screenType)
