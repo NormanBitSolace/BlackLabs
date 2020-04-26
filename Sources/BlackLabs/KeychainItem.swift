@@ -143,7 +143,7 @@ public struct KeychainItem {
         }
     }
 
-    public static func deleteUserIdentifierFromKeychain(serviceKey: String) {
+    public static func deleteUserIdentifierFromKeychain() {
         do {
             try KeychainItem(account: "userIdentifier").deleteItem()
         } catch {
