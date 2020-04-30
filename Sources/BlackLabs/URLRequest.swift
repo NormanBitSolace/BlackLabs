@@ -19,7 +19,8 @@ public extension URLRequest {
  */
     var info: String {
         let headers = self.allHTTPHeaderFields?.description ?? ""
-        return ("\n\(self.httpMethod ?? "method unspecified") \n\(self.url?.absoluteString ?? "nil URL")\nheaders: \(headers)")
+        let body = httpBody?.asString.prefix(100) ?? "no body"
+        return ("\n\(self.httpMethod ?? "method unspecified") \n\(self.url?.absoluteString ?? "nil URL")\nheaders: \(headers)\nbody: \(body)")
     }
 
     static func createGet(url: URL) -> URLRequest {
