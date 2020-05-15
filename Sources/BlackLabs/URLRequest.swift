@@ -29,7 +29,7 @@ public extension URLRequest {
         return req
     }
 
-    static func createPost(url: URL, data: Data) -> URLRequest {
+    static func createPost(url: URL, data: Data?) -> URLRequest {
         var req = URLRequest(url: url)
         req.httpMethod = "POST"
         req.httpBody = data

@@ -27,6 +27,35 @@ public extension URL {
         }
     }
 
+    func postNoBody(completion: (() -> Void)?) {
+        postData(data:nil) { _ in
+            completion?()
+        }
+    }
+
+    func postModel<T: Codable>(_ model: T, completion: @escaping (T?) -> Void) {
+        guard let data = model.encode() else { return completion(nil) }
+        postData(data: data) { result in
+            if let o: T = result.decode() {
+                completion(o)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
+    /// Posts a data transfer object and gets a model back
+    func postModelDTO<T: Codable, R: Codable>(_ model: T, returnType: R.Type, completion: @escaping (R?) -> Void) {
+        guard let data = model.encode() else { return completion(nil) }
+        postData(data: data) { result in
+            if let o: R = result.decode() {
+                completion(o)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+
     func getData(completion: @escaping (Data?) -> Void) {
         let req = URLRequest.createGet(url: self)
         URLSession.shared.runTask(with: req) { result in
@@ -72,7 +101,7 @@ public extension URL {
         URLSession.shared.runTask(with: req) { result in completion(result) }
     }
 
-    func postData(data: Data, completion: @escaping (Result<Data?, DataTaskError>) -> Void) {
+    func postData(data: Data? = nil, completion: @escaping (Result<Data?, DataTaskError>) -> Void) {
         let req = URLRequest.createPost(url: self, data: data)
         URLSession.shared.runTask(with: req) { result in completion(result) }
     }
