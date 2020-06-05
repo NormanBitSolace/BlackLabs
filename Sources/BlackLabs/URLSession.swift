@@ -13,21 +13,21 @@ public extension URLSession {
         let logging = UserDefaults.standard.bool(forKey: URLSession.loggingKey)
         if logging { print(request.info) }
         let task = URLSession.shared.dataTask(with: request) { data, resp, err in
-            guard err == nil else {
-                let error: DataTaskError = .response(err!)
-                if logging { print(error) }
-                return completion(.failure(error))
-            }
-            if let statusCode = resp?.statusCode {
-                guard statusCode < 400  else {
-                    let error: DataTaskError = .httpStatusResponse(statusCode)
+            if let resp = resp as? HTTPURLResponse {
+                switch resp.statusCode {
+                case 200 ..< 300:
+                    if logging { print("Success \(data?.asString.prefix(100) ?? "nil"))") }
+                    completion(.success(data))
+                default:
+                    let error: DataTaskError = .httpStatusResponse(resp.statusCode)
                     if logging { print(error) }
                     return completion(.failure(error))
                 }
+            } else if let err = err {
+                let error: DataTaskError = .response(err)
+                if logging { print(error) }
+                return completion(.failure(error))
             }
-            if logging { print("Success \(data?.asString.prefix(100) ?? "nil"))") }
-            completion(.success(data))
         }
         task.resume()
-    }
-}
+    }}
