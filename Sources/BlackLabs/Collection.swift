@@ -33,7 +33,7 @@ public extension Sequence where Element == String {
 
     func toDictionary(delimiter: String = "\t") -> [String: String]  {
         let d = removeEmptyLines.reduce(into: [String: String]()) { result, line in
-            if let (key, value) = line.keyValue {
+            if let (key, value) = line.keyValue(delimiter: delimiter) {
                 result[key] = value
             }
         }

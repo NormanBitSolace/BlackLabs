@@ -2,6 +2,13 @@ import UIKit
 
 public extension URL {
 
+    init(_ string: StaticString) {
+        guard let url = URL(string: "\(string)") else {
+            preconditionFailure("App assumes '\(string)' is a valid URL.")
+        }
+        self = url
+    }
+
     init(_ string: String) {
         guard let url = URL(string: "\(string)") else {
             preconditionFailure("App assumes '\(string)' is a valid URL.")

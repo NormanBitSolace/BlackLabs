@@ -37,12 +37,12 @@ public extension String {
         return self.trimmingCharacters(in: .whitespaces)
     }
     /// If a string begins with a key  and a value separated by a tab, this will return a key value pair.
-    var keyValue: (String, String)? {
-        let parts = self.components(separatedBy: "\t")
+    func keyValue(delimiter: String = "\t") -> (String, String)? {
+        let parts = self.components(separatedBy: delimiter)
         if parts.count >= 2 {
             let key = parts[0].trim
             /// It is possible that the value contents include a tab so they are rejoined vs. using parts[1].trim
-            let value = (parts[1..<parts.count]).joined(separator: "\t").trim
+            let value = (parts[1..<parts.count]).joined(separator: delimiter).trim
             return (key, value)
         }
         return nil
@@ -216,4 +216,64 @@ public extension String {
 
     return finalScore
   }
+}
+
+public extension String {
+    static let stateDictionary: [String : String] = [
+        "Alaska" : "AK",
+        "Alabama" : "AL",
+        "Arkansas" : "AR",
+        "American Samoa" : "AS",
+        "Arizona" : "AZ",
+        "California" : "CA",
+        "Colorado" : "CO",
+        "Connecticut" : "CT",
+        "District of Columbia" : "DC",
+        "Delaware" : "DE",
+        "Florida" : "FL",
+        "Georgia" : "GA",
+        "Guam" : "GU",
+        "Hawaii" : "HI",
+        "Iowa" : "IA",
+        "Idaho" : "ID",
+        "Illinois" : "IL",
+        "Indiana" : "IN",
+        "Kansas" : "KS",
+        "Kentucky" : "KY",
+        "Louisiana" : "LA",
+        "Massachusetts" : "MA",
+        "Maryland" : "MD",
+        "Maine" : "ME",
+        "Michigan" : "MI",
+        "Minnesota" : "MN",
+        "Missouri" : "MO",
+        "Mississippi" : "MS",
+        "Montana" : "MT",
+        "North Carolina" : "NC",
+        " North Dakota" : "ND",
+        "Nebraska" : "NE",
+        "New Hampshire" : "NH",
+        "New Jersey" : "NJ",
+        "New Mexico" : "NM",
+        "Nevada" : "NV",
+        "New York" : "NY",
+        "Ohio" : "OH",
+        "Oklahoma" : "OK",
+        "Oregon" : "OR",
+        "Pennsylvania" : "PA",
+        "Puerto Rico" : "PR",
+        "Rhode Island" : "RI",
+        "South Carolina" : "SC",
+        "South Dakota" : "SD",
+        "Tennessee" : "TN",
+        "Texas" : "TX",
+        "Utah" : "UT",
+        "Virginia" : "VA",
+        "Virgin Islands" : "VI",
+        "Vermont" : "VT",
+        "Washington" : "WA",
+        "Wisconsin" : "WI",
+        "West Virginia" : "WV",
+        "Wyoming" : "WY"
+    ]
 }
