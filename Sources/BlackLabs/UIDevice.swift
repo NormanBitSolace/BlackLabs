@@ -32,7 +32,7 @@ public enum ScreenType : Int, CaseIterable {
     case pad1024by1366
 }
 
-extension ScreenType {
+public extension ScreenType {
     static var current: ScreenType {
         switch ScreenSize.SCREEN_MAX_LENGTH {
         case 480:
