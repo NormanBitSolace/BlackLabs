@@ -1,13 +1,13 @@
 import Foundation
 
-public extension URLResponse {
-    var statusCode: Int? {
-        if let httpResp = self as? HTTPURLResponse {
-            return httpResp.statusCode
-        }
-        return nil
-    }
-}
+//public extension URLResponse {
+//    var statusCode: Int? {
+//        if let httpResp = self as? HTTPURLResponse {
+//            return httpResp.statusCode
+//        }
+//        return nil
+//    }
+//}
 
 public extension URLRequest {
     /** Describes `URLReqest` METHOD , URL and headers respectively,

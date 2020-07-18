@@ -115,6 +115,16 @@ public func _fileNamesFromDir(_ path: String) -> [String] {
     return names
 }
 
+/// e.g. `_writeStringToDir("/Users/Norman/Desktop/", fileName: "a.txt", fileContents: "Bob")` would write a.txt to the desktop, contents Bob. `print(#file)` can be useful to find currnt project dir.
+public func _writeStringToDir(_ dirPath: String, fileName: String, fileContents: String) {
+    let fm = FileManager.default
+    try? fm.createDirectory(atPath: dirPath, withIntermediateDirectories: true, attributes: nil)
+    let fileExists = fm.fileExists(atPath: dirPath)
+    guard fileExists else { fatalError("Invalid path: \(dirPath)") }
+    let path = dirPath.appending(fileName)
+    fm.createFile(atPath: path, contents: fileContents.data(using: .utf8), attributes: nil)
+}
+
 import UIKit
 /// e.g. `_pngFromDir("/Users/Norman/Desktop/")` would return all of the .png's on desktop
 public func _pngFromDir(_ path: String) -> [UIImage] {

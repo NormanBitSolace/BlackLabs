@@ -29,8 +29,12 @@ public extension CKRecord {
      CKRecord.subscribeToRecordUpdate(recordType: "FileAssetRecord") { (error) in
      if error == nil { print("success") }
      }
-*/
-    static func subscribeToRecordUpdate(recordType: String, completion: @escaping (Error?)->Swift.Void) {
+
+
+     https://developer.apple.com/library/archive/qa/qa1917/_index.html
+     Note: The initializers for creating a CKSubscription object with a subscriptionID are deprecated, so use CKQuerySubscription, CKRecordZoneSubscription, or CKDatabaseSubscription on iOS 10.0+, macOS 10.12+, and tvOS 10.0+. Be aware that CKQuerySubscription is not supported in the shared database, and CKDatabaseSubscription currently only tracks the changes from custom zones in the private and shared database.
+
+ static func subscribeToRecordUpdate(recordType: String, completion: @escaping (Error?)->Swift.Void) {
         let subscription = CKSubscription(
             recordType: recordType,
             predicate: NSPredicate(value: true),
@@ -45,6 +49,7 @@ public extension CKRecord {
             completion(error)
         }
     }
+     */
 }
 
 public extension CKNotification {
