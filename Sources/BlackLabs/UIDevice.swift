@@ -26,6 +26,8 @@ public enum ScreenType : Int, CaseIterable {
     case pad810by1080
     /// iPad Pro 10.5
     case pad834by1112
+    /// iPad 10.9
+    case pad820by1180
     /// iPad Pro 11
     case pad834by1194
     /// iPad Pro 12.9
@@ -53,6 +55,8 @@ public extension ScreenType {
             return .pad810by1080
         case 1112:
             return .pad834by1112
+        case 1180:
+            return .pad820by1180
         case 1194:
              return .pad834by1194
         case 1366:
@@ -86,6 +90,7 @@ public extension ScreenType {
         case .pad768by1024: return CGSize(width: 768, height: 1024)
         case .pad810by1080: return CGSize(width: 810, height: 1080)
         case .pad834by1112: return CGSize(width: 834, height: 1112)
+        case .pad820by1180: return CGSize(width: 820, height: 1180)
         case .pad834by1194: return CGSize(width: 834, height: 1194)
         case .pad1024by1366: return CGSize(width: 1024, height: 1366)
         }
