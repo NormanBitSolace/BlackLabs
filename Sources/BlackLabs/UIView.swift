@@ -3,6 +3,8 @@ import WebKit
 
 public extension UIView {
 
+    func removeSubviews() { subviews.forEach { $0.removeFromSuperview() } }
+
     func constrain(to target: UIView, padding: UIEdgeInsets = .zero) {
         translatesAutoresizingMaskIntoConstraints = false
 
