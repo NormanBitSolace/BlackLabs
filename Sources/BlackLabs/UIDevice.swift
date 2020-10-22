@@ -16,10 +16,14 @@ public enum ScreenType : Int, CaseIterable {
     case phone375by667
     /// 5.5 inch (iPhone 6s Plus, iPhone 7 Plus, iPhone 8 Plus)
     case phone414by736
-    /// 5.8 inch (iPhone 11 Pro, iPhone X, iPhone XS)
+    /// 5.8 inch (iPhone 11 Pro, iPhone X, iPhone XS, iPhone 12 mini)
     case phone375by812
+    /// 6.1 inch (iPhone 12, iPhone 12 Pro)
+    case phone390by844
     /// 6.5 inch (iPhone 11 Pro Max, iPhone 11, iPhone XS Max, iPhone XR)
     case phone414by896
+    /// 6.7 inch (iPhone 12 Pro Max)
+    case phone428by926
     /// iPad Pro, iPad Air 2, iPad Mini 4
     case pad768by1024
     /// iPad 10.2
@@ -47,8 +51,12 @@ public extension ScreenType {
             return .phone414by736
         case 812:
             return .phone375by812
+        case 844:
+            return .phone390by844
         case 896:
             return .phone414by896
+        case 926:
+            return .phone428by926
         case 1024:
             return .pad768by1024
         case 1080:
@@ -58,7 +66,7 @@ public extension ScreenType {
         case 1180:
             return .pad820by1180
         case 1194:
-             return .pad834by1194
+            return .pad834by1194
         case 1366:
             return .pad1024by1366
         default:
@@ -86,7 +94,9 @@ public extension ScreenType {
         case .phone375by667: return CGSize(width: 375, height: 667)
         case .phone414by736: return CGSize(width: 414, height: 736)
         case .phone375by812: return CGSize(width: 375, height: 812)
+        case .phone390by844: return CGSize(width: 390, height: 844)
         case .phone414by896: return CGSize(width: 414, height: 896)
+        case .phone428by926: return CGSize(width: 428, height: 926)
         case .pad768by1024: return CGSize(width: 768, height: 1024)
         case .pad810by1080: return CGSize(width: 810, height: 1080)
         case .pad834by1112: return CGSize(width: 834, height: 1112)
