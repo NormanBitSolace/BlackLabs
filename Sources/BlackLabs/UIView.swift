@@ -172,11 +172,11 @@ public extension UIView {
  appCoordinator.showLifeschoolVideo(urlStr)
  }
  */
-class AddTapAction: UIView {
+public class AddTapAction: UIView {
     var touchHandler: (() -> Void)?
 
     @discardableResult
-    init(toView view: UIView, touchHandler: @escaping () -> Void) {
+    public init(toView view: UIView, touchHandler: @escaping () -> Void) {
         self.touchHandler = touchHandler
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = false
@@ -218,15 +218,15 @@ public extension UIView {
 }
 
 // Use blocks with UIControls e.g. button.addAction { print("touched") }
-class ClosureSleeve {
+public class ClosureSleeve {
     let closure: () -> Void
 
-    init(attachTo: AnyObject, closure: @escaping () -> Void) {
+    public init(attachTo: AnyObject, closure: @escaping () -> Void) {
         self.closure = closure
         objc_setAssociatedObject(attachTo, "[\(arc4random())]", self, .OBJC_ASSOCIATION_RETAIN)
     }
 
-    @objc func invoke() {
+    @objc public func invoke() {
         closure()
     }
 }
