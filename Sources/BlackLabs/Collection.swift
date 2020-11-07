@@ -8,6 +8,13 @@ public extension Array {
     }
 }
 
+public extension Array where Element: Equatable {
+    mutating func remove(object: Element) {
+        guard let index = firstIndex(of: object) else {return}
+        remove(at: index)
+    }
+}
+
 public extension Array where Element: Hashable {
     var histogram: [Element: Int] {
         return self.reduce(into: [:]) { counts, elem in counts[elem, default: 0] += 1 }
