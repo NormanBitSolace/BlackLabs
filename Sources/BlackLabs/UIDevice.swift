@@ -12,6 +12,8 @@ public enum ScreenType : Int, CaseIterable {
     case phone320by480
     /// 4 inch (iPhone 5, 5s, 5c, SE, iPod Touch 5th, 6h gen)
     case phone320by568
+    /// Display Zoom on  iPhone 11 Pro, iPhone 12 mini, iPhone 12, iPhone 12 Pro
+    case phone320by693
     /// 4.7 inch (iPhone 6, iPhone 6s, iPhone 7, iPhone 8)
     case phone375by667
     /// 5.5 inch (iPhone 6s Plus, iPhone 7 Plus, iPhone 8 Plus)
@@ -37,7 +39,11 @@ public enum ScreenType : Int, CaseIterable {
     /// iPad Pro 12.9
     case pad1024by1366
 }
-
+/*
+UIAccessibility.isBoldTextEnabled
+/// Display Zoom on for iPhone 11 Pro, iPhone 12 mini, iPhone 12, iPhone 12 Pro
+case phone320by693
+*/
 public extension ScreenType {
     static var current: ScreenType {
         switch ScreenSize.SCREEN_MAX_LENGTH {
@@ -47,6 +53,8 @@ public extension ScreenType {
             return .phone320by568
         case 667:
             return .phone375by667
+        case 693:
+            return .phone320by693
         case 736:
             return .phone414by736
         case 812:
@@ -91,6 +99,7 @@ public extension ScreenType {
         switch screenType {
         case .phone320by480: return CGSize(width: 320, height: 480)
         case .phone320by568: return CGSize(width: 320, height: 568)
+        case .phone320by693: return CGSize(width: 320, height: 693)
         case .phone375by667: return CGSize(width: 375, height: 667)
         case .phone414by736: return CGSize(width: 414, height: 736)
         case .phone375by812: return CGSize(width: 375, height: 812)
