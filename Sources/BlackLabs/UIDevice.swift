@@ -12,10 +12,10 @@ public enum ScreenType : Int, CaseIterable {
     case phone320by480
     /// 4 inch (iPhone 5, 5s, 5c, SE, iPod Touch 5th, 6h gen)
     case phone320by568
-    /// Display Zoom on  iPhone 11 Pro, iPhone 12 mini, iPhone 12, iPhone 12 Pro
-    case phone320by693
     /// 4.7 inch (iPhone 6, iPhone 6s, iPhone 7, iPhone 8)
     case phone375by667
+    /// Display Zoom on  iPhone 11 Pro, iPhone 12 mini, iPhone 12, iPhone 12 Pro
+    case phone320by693
     /// 5.5 inch (iPhone 6s Plus, iPhone 7 Plus, iPhone 8 Plus)
     case phone414by736
     /// 5.8 inch (iPhone 11 Pro, iPhone X, iPhone XS, iPhone 12 mini)
