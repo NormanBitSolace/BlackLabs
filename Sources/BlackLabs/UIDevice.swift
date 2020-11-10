@@ -39,11 +39,7 @@ public enum ScreenType : Int, CaseIterable {
     /// iPad Pro 12.9
     case pad1024by1366
 }
-/*
-UIAccessibility.isBoldTextEnabled
-/// Display Zoom on for iPhone 11 Pro, iPhone 12 mini, iPhone 12, iPhone 12 Pro
-case phone320by693
-*/
+
 public extension ScreenType {
     static var current: ScreenType {
         switch ScreenSize.SCREEN_MAX_LENGTH {

@@ -39,6 +39,7 @@ let DEVICE_MODELS: [String: String] = [
     "iPhone12,1": "iPhone 11",
     "iPhone12,3": "iPhone 11 Pro",
     "iPhone12,5": "iPhone 11 Pro Max",
+    "iPhone12,8" : "iPhone SE 2nd Gen",
     "iPhone13,1": "iPhone 12 Mini",
     "iPhone13,2": "iPhone 12",
     "iPhone13,3": "iPhone 12 Pro",
@@ -113,6 +114,8 @@ let DEVICE_MODELS: [String: String] = [
     "iPad11,4": "iPad Air 3rd Gen",
     "iPad11,6" : "iPad 8th Gen",
     "iPad11,7" : "iPad 8th Gen",
+    "iPad13,1" : "iPad Air 4th Gen (WiFi)",
+    "iPad13,2" : "iPad Air 4th Gen (WiFi+Celular)",
 
     "Watch1,1": "Apple Watch 38mm case",
     "Watch1,2": "Apple Watch 42mm case",
