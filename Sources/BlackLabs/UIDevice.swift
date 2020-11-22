@@ -139,6 +139,7 @@ public extension UIDevice {
 public extension UIDevice {
     
     static let modelName: String = UIDevice.current.modelName
+    static let simulatorModelName: String = UIDevice.current.simulatorModelName
     static let isPad = UIDevice.current.userInterfaceIdiom == .pad
     static let isPhone = UIDevice.current.userInterfaceIdiom == .phone
     static let isSimulator = UIDevice.modelName.contains("Simulator")
@@ -165,5 +166,12 @@ public extension UIDevice {
         return "Unknown"
 
     }
-    
+
+    var simulatorModelName: String {
+        if let id = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"],
+        let modelName = DEVICE_MODELS[id] {
+            return modelName
+        }
+        return "Unknown"
+    }
 }
