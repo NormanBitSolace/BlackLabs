@@ -142,6 +142,7 @@ public extension UIDevice {
     static let simulatorModelName: String = UIDevice.current.simulatorModelName
     static let isPad = UIDevice.current.userInterfaceIdiom == .pad
     static let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+    static let isMacCatalyst = UIDevice.current.isMacCatalyst
     static let isSimulator = UIDevice.modelName.contains("Simulator")
     static var screenType = ScreenType.current
     static let size = ScreenType.size(forScreenType: screenType)
@@ -149,6 +150,13 @@ public extension UIDevice {
 
     var isPortrait: Bool { return UIApplication.shared.statusBarOrientation.isPortrait }
     var orientationSize: CGSize { return isPortrait ? UIDevice.size : UIDevice.landscapeSize }
+    var isMacCatalyst: Bool {
+        #if targetEnvironment(macCatalyst)
+            return true
+        #else
+            return false
+        #endif
+    }
 
     //  access with stored UIDevice.modelName
     fileprivate var modelName: String {

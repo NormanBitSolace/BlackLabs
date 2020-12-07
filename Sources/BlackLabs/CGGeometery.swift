@@ -30,6 +30,9 @@ public extension Array where Element == CGPoint {
     }
 }
 
+public extension CGSize {
+    var min: CGFloat { Swift.min(height, width) }
+}
 
 public extension CGRect {
     var center: CGPoint {
